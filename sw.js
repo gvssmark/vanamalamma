@@ -1,7 +1,7 @@
 const STATIC_CACHE = 'temple-pwa-static-v1';
 const DATA_CACHE = 'temple-pwa-data-v1';
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxElKmiEFwhiIbpUxypWMB5xx31ZxaJ0ThHwqUCLQs0kwDp5fyITci_pnBqDytY6AH2/exec?sheetId=1IuC4hcLCJlKuJE2jFWYCndFUaMDCQF6QfJRTkHuHcu8';
-const APP_ASSETS = ['./', './temple-pwa.html', './manifest.json', './sw.js'];
+const APP_ASSETS = ['./', './index.html', './manifest.json', './sw.js'];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(STATIC_CACHE).then((cache) => cache.addAll(APP_ASSETS)));
