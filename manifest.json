@@ -4,7 +4,7 @@
   "description": "దేవస్థానం సమాచారం, పూజలు, పండుగలు, దాతలు, భక్త అనుభవాలు మరియు ప్రకటనల కోసం ఆఫ్‌లైన్-ఫస్ట్ PWA.",
   "lang": "te-IN",
   "dir": "ltr",
-  "start_url": "./temple-pwa.html",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
