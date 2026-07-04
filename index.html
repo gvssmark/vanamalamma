@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#7a2e1f" />
+  <meta name="description" content="శ్రీ విజయ వనమలమ్మ అమ్మవారి దేవస్థానం వివరాలు, పూజలు, పండుగలు, దർശన సమయాలు మరియు ప్రకటనలు." />
+  <title>శ్రీ విజయ వనమలమ్మ అమ్మవారి దేవస్థానం</title>
+  <link rel="manifest" href="./manifest.json" />
+  <style>
+    :root {
+      --bg: #f7f2ea;
+      --surface: #fffaf4;
+      --surface-2: #f2e5d4;
+      --text: #2c1a12;
+      --muted: #6e5448;
+      --primary: #8b2f1c;
+      --primary-2: #c4772e;
+      --accent: #bba26a;
+      --success: #2b6b45;
+      --border: rgba(44,26,18,.12);
+      --shadow: 0 14px 36px rgba(73, 39, 17, 0.10);
+      --radius: 22px;
+      --radius-sm: 14px;
+      --space-1: .25rem;
+      --space-2: .5rem;
+      --space-3: .75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans Telugu", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(196,119,46,.10), transparent 28%),
+        linear-gradient(180deg, #fbf6ef 0%, var(--bg) 100%);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .skip-link {
+      position: absolute; left: 1rem; top: -3rem; background: var(--text); color: #fff; padding: .75rem 1rem; border-radius: 10px; z-index: 20;
+    }
+    .skip-link:focus { top: 1rem; }
+    .topbar {
+      position: sticky; top: 0; z-index: 10; backdrop-filter: blur(14px);
+      background: rgba(251,246,239,.88); border-bottom: 1px solid rgba(44,26,18,.08);
+    }
+    .topbar-inner, .hero, .section, .footer-inner {
+      width: min(calc(100% - 1.5rem), var(--max)); margin: 0 auto;
+    }
+    .topbar-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .9rem 0;
+    }
+    .brand { display: flex; align-items: center; gap: .9rem; min-width: 0; }
+    .logo {
+      width: 50px; height: 50px; border-radius: 50%;
+      background: conic-gradient(from 180deg, var(--primary), var(--primary-2), var(--accent), var(--primary));
+      display: grid; place-items: center; color: #fff; box-shadow: var(--shadow); flex-shrink: 0;
+    }
+    .logo svg { width: 28px; height: 28px; }
+    .brand-text { min-width: 0; }
+    .brand-text h1 { margin: 0; font-size: clamp(1rem, 2vw, 1.15rem); }
+    .brand-text p { margin: .15rem 0 0; color: var(--muted); font-size: .86rem; }
+    .install-btn, .refresh-btn {
+      border: 0; background: var(--primary); color: #fff; padding: .8rem 1rem; border-radius: 999px; font-weight: 700; cursor: pointer;
+      box-shadow: 0 10px 20px rgba(139,47,28,.18);
+    }
+    .refresh-btn { background: #fff; color: var(--primary); border: 1px solid rgba(139,47,28,.18); box-shadow: none; }
+    .install-btn[hidden] { display: none; }
+    .hero {
+      display: grid; grid-template-columns: 1.2fr .8fr; gap: 1.25rem; padding: 1.4rem 0 1rem;
+    }
+    .hero-card, .panel, .stat, .timing-row, .announcement, .pooja-item, .story-item, .donor-item, .experience-item, .gallery-card {
+      background: rgba(255,250,244,.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-card { padding: clamp(1.25rem, 3vw, 2rem); position: relative; overflow: hidden; }
+    .hero-card::after {
+      content: ""; position: absolute; inset: auto -60px -60px auto; width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(196,119,46,.16), transparent 65%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem; padding: .45rem .8rem; border-radius: 999px;
+      background: rgba(139,47,28,.08); color: var(--primary); font-weight: 700; font-size: .82rem;
+    }
+    .hero-card h2 { margin: 1rem 0 .85rem; font-size: clamp(1.75rem, 4vw, 3rem); line-height: 1.15; }
+    .hero-card p { margin: 0 0 1rem; color: var(--muted); max-width: 62ch; }
+    .meta-grid, .quick-grid, .info-grid, .pooja-grid, .dual-grid, .gallery-grid {
+      display: grid; gap: 1rem;
+    }
+    .meta-grid { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); margin-top: 1.25rem; }
+    .meta-item {
+      padding: 1rem; border-radius: 18px; background: rgba(255,255,255,.55); border: 1px solid rgba(44,26,18,.08);
+    }
+    .meta-item small, .section-subtitle, .muted, .cache-note { color: var(--muted); }
+    .quick-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat { padding: 1.15rem; }
+    .stat strong { display: block; font-size: 1.5rem; margin-bottom: .25rem; }
+    .section { padding: .75rem 0 1.1rem; }
+    .section-head {
+      display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1rem;
+    }
+    .section-head h3 { margin: 0; font-size: clamp(1.3rem, 2vw, 1.9rem); }
+    .panel { padding: 1.1rem; }
+    .info-grid { grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
+    .timing-row, .announcement, .pooja-item, .story-item, .donor-item, .experience-item, .gallery-card { padding: 1rem; }
+    .timing-row { display: grid; grid-template-columns: 120px 1fr 1fr; gap: .75rem; align-items: center; }
+    .date-badge {
+      display: inline-flex; align-items: center; justify-content: center; min-width: 108px; padding: .5rem .75rem;
+      border-radius: 999px; background: rgba(43,107,69,.10); color: var(--success); font-weight: 700;
+    }
+    .pooja-grid, .dual-grid, .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .amount { color: var(--primary); font-size: 1.35rem; font-weight: 800; }
+    .chip {
+      display: inline-flex; align-items: center; gap: .35rem; padding: .42rem .7rem; border-radius: 999px; font-size: .78rem;
+      background: rgba(196,119,46,.14); color: #8f531f; font-weight: 700;
+    }
+    .gallery-card img {
+      aspect-ratio: 4 / 3; object-fit: cover; border-radius: 16px; background: var(--surface-2);
+    }
+    .statusbar {
+      display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin-top: 1rem;
+    }
+    .status-pill {
+      display: inline-flex; align-items: center; gap: .45rem; padding: .55rem .85rem; border-radius: 999px;
+      background: rgba(255,255,255,.7); border: 1px solid rgba(44,26,18,.08); font-size: .86rem;
+    }
+    .footer { padding: 2rem 0 3rem; }
+    .footer-inner { color: var(--muted); font-size: .92rem; }
+    .empty { padding: 1rem; border: 1px dashed rgba(44,26,18,.18); border-radius: 16px; color: var(--muted); }
+    .hidden { display: none !important; }
+    .skeleton {
+      height: 110px; border-radius: 18px; background: linear-gradient(90deg, rgba(44,26,18,.06), rgba(44,26,18,.12), rgba(44,26,18,.06));
+      background-size: 200% 100%; animation: shimmer 1.3s linear infinite;
+    }
+    @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; }
+      .quick-grid { grid-template-columns: 1fr 1fr; }
+      .timing-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .topbar-inner, .section-head { flex-direction: column; align-items: stretch; }
+      .quick-grid { grid-template-columns: 1fr; }
+      .brand { align-items: flex-start; }
+      .install-btn, .refresh-btn { width: 100%; }
+      .meta-grid, .info-grid, .pooja-grid, .dual-grid, .gallery-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M32 8 14 26h6v18h24V26h6L32 8Z"></path>
+            <path d="M25 44V30h14v14"></path>
+            <path d="M20 26h24"></path>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 id="brandName">శ్రీ విజయ వనమలమ్మ అమ్మవారు</h1>
+          <p id="brandAddress">మచిలీపట్నం</p>
+        </div>
+      </div>
+      <div style="display:flex; gap:.75rem; flex-wrap:wrap;">
+        <button id="refreshBtn" class="refresh-btn" type="button">తాజా డేటా తెచ్చు</button>
+        <button id="installBtn" class="install-btn" type="button" hidden>Install App</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <article class="hero-card">
+        <span class="eyebrow">దేవస్థానం సమాచారం</span>
+        <h2 id="templeName">శ్రీ విజయ వనమలమ్మ అమ్మవారి దేవస్థానం</h2>
+        <p id="aboutTemple">స్వయంభూ అమ్మవారు</p>
+        <div class="meta-grid" id="metaGrid"></div>
+        <div class="statusbar">
+          <div class="status-pill">డేటా మూలం: <strong id="dataSourceLabel">లోకల్ క్యాష్</strong></div>
+          <div class="status-pill">చివరి నవీకరణ: <strong id="lastUpdatedLabel">-</strong></div>
+          <div class="status-pill cache-note" id="staleLabel">తాజా డేటా తనిఖీ జరుగుతోంది...</div>
+        </div>
+      </article>
+      <aside class="quick-grid">
+        <div class="stat"><span class="muted">ప్రకటనలు</span><strong id="announcementCount">0</strong><span class="muted">చెల్లుబాటు అయ్యేవి మాత్రమే</span></div>
+        <div class="stat"><span class="muted">పండుగలు</span><strong id="festivalCount">0</strong><span class="muted">రాబోయే తేదీలు</span></div>
+        <div class="stat"><span class="muted">పూజలు</span><strong id="poojaCount">0</strong><span class="muted">సేవల జాబితా</span></div>
+        <div class="stat"><span class="muted">భక్త అనుభవాలు</span><strong id="experienceCount">0</strong><span class="muted">పంచుకున్న అభిప్రాయాలు</span></div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h3>దర్శన సమయాలు</h3>
+          <p class="section-subtitle">ప్రతి రోజు ఉదయం, సాయంత్రం సమయాలు</p>
+        </div>
+      </div>
+      <div class="panel" id="darshanList"><div class="skeleton"></div></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h3>స్థల పురాణం</h3>
+          <p class="section-subtitle">ఆవిర్భావం, చరిత్ర, విశేషాలు</p>
+        </div>
+      </div>
+      <div class="dual-grid" id="storyList"><div class="skeleton"></div></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h3>పూజ సేవలు</h3>
+          <p class="section-subtitle">సేవ పేరు, మొత్తం, వివరాలు</p>
+        </div>
+      </div>
+      <div class="pooja-grid" id="poojaList"><div class="skeleton"></div></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h3>ప్రకటనలు</h3>
+          <p class="section-subtitle">గడువు ముగిసిన తేదీలు చూపించబడవు</p>
+        </div>
+      </div>
+      <div class="info-grid" id="announcementList"><div class="skeleton"></div></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h3>పండుగలు</h3>
+          <p class="section-subtitle">తేదీ ఆధారంగా క్రమబద్ధీకరించిన జాబితా</p>
+        </div>
+      </div>
+      <div class="info-grid" id="festivalList"><div class="skeleton"></div></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h3>దాతలు</h3>
+          <p class="section-subtitle">దాతల వివరాలు మరియు మొత్తాలు</p>
+        </div>
+      </div>
+      <div class="dual-grid" id="donorList"><div class="skeleton"></div></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h3>భక్త అనుభవాలు</h3>
+          <p class="section-subtitle">భక్తులు పంచుకున్న అనుభూతులు</p>
+        </div>
+      </div>
+      <div class="dual-grid" id="experienceList"><div class="skeleton"></div></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h3>చిత్రాలు</h3>
+          <p class="section-subtitle">Google Drive File ID నుండి నిర్మించిన ఇమేజ్ లింకులు</p>
+        </div>
+      </div>
+      <div class="gallery-grid" id="galleryList"><div class="skeleton"></div></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p id="footerText">ఈ యాప్ లోకల్ క్యాష్ నుండి డేటాను ముందుగా చూపిస్తుంది. తర్వాత ఆన్‌లైన్‌లో తాజా డేటా తీసుకొని స్వయంచాలకంగా పునఃలోడ్ చేస్తుంది.</p>
+    </div>
+  </footer>
+
+  <script>
+    const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxElKmiEFwhiIbpUxypWMB5xx31ZxaJ0ThHwqUCLQs0kwDp5fyITci_pnBqDytY6AH2/exec?sheetId=1IuC4hcLCJlKuJE2jFWYCndFUaMDCQF6QfJRTkHuHcu8';
+    const CACHE_KEY = 'temple-pwa-sheet-cache-v1';
+    const CACHE_MAX_AGE_MS = 12 * 60 * 60 * 1000;
+    const FALLBACK_DATA = {
+      sheetId: '1IuC4hcLCJlKuJE2jFWYCndFUaMDCQF6QfJRTkHuHcu8',
+      sheetName: 'VMS-Temple',
+      tabs: {
+        TempleInfo: [
+          { Key: 'TempleName', Value: 'శ్రీ విజయ వనమలమ్మ అమ్మవారి దేవస్థానం' },
+          { Key: 'ShortName', Value: 'శ్రీ విజయ వనమలమ్మ అమ్మవారు' },
+          { Key: 'Address', Value: 'మచిలీపట్నం' },
+          { Key: 'Phone', Value: 9989036183 },
+          { Key: 'Email', Value: 'srivamalamma@gmail.com' },
+          { Key: 'Website', Value: 'vanamalamma.gvssmark.in' },
+          { Key: 'Latitude', Value: 16.1875 },
+          { Key: 'Longitude', Value: 81.1389 },
+          { Key: 'BannerImage', Value: 'Google Drive Link' },
+          { Key: 'AboutTemple', Value: 'స్వయంభూ అమ్మవారు' },
+          { Key: 'Facebook', Value: '' },
+          { Key: 'YouTube', Value: '' },
+          { Key: 'WhatsApp', Value: '' },
+          { Key: 'UPI', Value: '' },
+          { Key: 'QRImage', Value: 'Google Drive Link' }
+        ],
+        SthalaPuranam: [
+          { Title: 'ఆవిర్భావం', Description: 'Will be updated' },
+          { Title: 'చరిత్ర', Description: 'Will be updated' },
+          { Title: 'విశేషం', Description: 'Will be updated' }
+        ],
+        DarshanTimings: [
+          { Day: 'Monday', Morning: '6 AM -12 PM', Evening: '4 PM - 8 PM' },
+          { Day: 'Tuesday', Morning: '6 AM -12 PM', Evening: '4 PM - 8 PM' },
+          { Day: 'Wednesday', Morning: '6 AM -12 PM', Evening: '4 PM - 8 PM' },
+          { Day: 'Thursday', Morning: '6 AM -12 PM', Evening: '4 PM - 8 PM' },
+          { Day: 'Friday', Morning: '6 AM -12 PM', Evening: '4 PM - 8 PM' },
+          { Day: 'Saturday', Morning: '6 AM -12 PM', Evening: '4 PM - 8 PM' },
+          { Day: 'Sunday', Morning: '6 AM -12 PM', Evening: '4 PM - 8 PM' }
+        ],
+        PoojaFees: [
+          { Pooja: 'అర్చన', Amount: 50, Description: 'గోత్రనామాలతో సాధారణ అర్చన ' },
+          { Pooja: 'అభిషేకం', Amount: 200, Description: 'గోత్రనామాలతో సాధారణ అర్చన మరియు క్షీరాభిషేకము ' },
+          { Pooja: 'సహస్రనామార్చన', Amount: 500, Description: 'గోత్రనామాలతో  అర్చన, క్షీరాభిషేకము మరియు సహస్రనామ అర్చన ' }
+        ],
+        Donors: [
+          { Name: 'VM Seshasayan', Place: 'Machilipatnam', Amount: 10000 },
+          { Name: 'Markandeyulu', Place: 'Hyderabad', Amount: 10000 }
+        ],
+        DevoteeExperiences: [
+          { Name: 'Ramaiah', Place: 'Hyderabad', Experience: 'మా కోరిక నెరవేరింది...' },
+          { Name: 'Sudari', Place: 'Hyderabad', Experience: 'మా కోరిక నెరవేరింది...' },
+          { Name: 'Seshasai', Place: 'Matlapalem', Experience: 'మా కోరిక నెరవేరింది...' }
+        ],
+        Images: [
+          { Category: 'deity', Title: 'Main Deity', FileID: '1vndtdrE9WyqYbo35_xcGUTafVR2PG-lG', Order: 1 },
+          { Category: 'deity', Title: 'Utsava Murthy', FileID: '1vndtdrE9WyqYbo35_xcGUTafVR2PG-lG', Order: 2 },
+          { Category: 'temple', Title: 'Entrance', FileID: '1vndtdrE9WyqYbo35_xcGUTafVR2PG-lG', Order: 1 },
+          { Category: 'temple', Title: 'Dhwaja Sthambam', FileID: '1vndtdrE9WyqYbo35_xcGUTafVR2PG-lG', Order: 2 }
+        ],
+        Announcements: [
+          { Date: '2026-07-14T18:30:00.000Z', Title: 'Will be update', Description: 'Will be update' },
+          { Date: '2026-07-19T18:30:00.000Z', Title: 'Will be update', Description: 'Will be update' }
+        ],
+        Festivals: [
+          { Date: '2026-07-14T18:30:00.000Z', Festival: 'Will be update', Description: 'Will be update' },
+          { Date: '2026-07-19T18:30:00.000Z', Festival: 'Will be update', Description: 'Will be update' }
+        ]
+      }
+    };
+
+    const el = (id) => document.getElementById(id);
+
+    function mapTempleInfo(list = []) {
+      return list.reduce((acc, item) => {
+        if (item && item.Key) acc[item.Key] = item.Value;
+        return acc;
+      }, {});
+    }
+
+    function formatDateDDMMYYYY(input) {
+      if (!input) return '-';
+      const date = new Date(input);
+      if (Number.isNaN(date.getTime())) return '-';
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year = date.getFullYear();
+      return `${day}/${month}/${year}`;
+    }
+
+    function formatDateTimeDDMMYYYY(input) {
+      if (!input) return '-';
+      const date = new Date(input);
+      if (Number.isNaN(date.getTime())) return '-';
+      return `${formatDateDDMMYYYY(date)} ${date.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true })}`;
+    }
+
+    function isUpcomingOrToday(input) {
+      const date = new Date(input);
+      if (Number.isNaN(date.getTime())) return false;
+      const itemDay = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+      const today = new Date();
+      const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
+      return itemDay >= todayStart;
+    }
+
+    function safeArray(value) {
+      return Array.isArray(value) ? value : [];
+    }
+
+    function driveImage(fileId) {
+      return fileId ? `https://drive.google.com/thumbnail?id=${encodeURIComponent(fileId)}&sz=w1200` : '';
+    }
+
+    function saveCache(data) {
+      try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({ savedAt: Date.now(), data }));
+      } catch (err) {
+        console.warn('Cache write failed', err);
+      }
+    }
+
+    function readCache() {
+      try {
+        const raw = localStorage.getItem(CACHE_KEY);
+        return raw ? JSON.parse(raw) : null;
+      } catch (err) {
+        console.warn('Cache read failed', err);
+        return null;
+      }
+    }
+
+    function isFresh(savedAt) {
+      return savedAt && (Date.now() - savedAt) < CACHE_MAX_AGE_MS;
+    }
+
+    function renderList(containerId, items, builder, emptyText) {
+      const container = el(containerId);
+      if (!container) return;
+      if (!items.length) {
+        container.innerHTML = `<div class="empty">${emptyText}</div>`;
+        return;
+      }
+      container.innerHTML = items.map(builder).join('');
+    }
+
+    function render(data, sourceLabel = 'లోకల్ క్యాష్', savedAt = null) {
+      const tabs = data?.tabs || {};
+      const info = mapTempleInfo(safeArray(tabs.TempleInfo));
+      const announcements = safeArray(tabs.Announcements)
+        .filter(item => isUpcomingOrToday(item.Date))
+        .sort((a, b) => new Date(a.Date) - new Date(b.Date));
+      const festivals = safeArray(tabs.Festivals)
+        .filter(item => isUpcomingOrToday(item.Date))
+        .sort((a, b) => new Date(a.Date) - new Date(b.Date));
+      const images = safeArray(tabs.Images).slice().sort((a, b) => (a.Order || 0) - (b.Order || 0));
+
+      el('brandName').textContent = info.ShortName || info.TempleName || 'దేవస్థానం';
+      el('brandAddress').textContent = info.Address || '-';
+      el('templeName').textContent = info.TempleName || info.ShortName || 'దేవస్థానం';
+      el('aboutTemple').textContent = info.AboutTemple || 'వివరాలు త్వరలో నవీకరించబడతాయి';
+      el('dataSourceLabel').textContent = sourceLabel;
+      el('lastUpdatedLabel').textContent = savedAt ? formatDateTimeDDMMYYYY(savedAt) : 'మొదటి లోడ్';
+      el('staleLabel').textContent = savedAt && !isFresh(savedAt) ? 'క్యాష్ పాతది. తాజా డేటా కోసం తనిఖీ చేయండి.' : 'తాజా డేటా తనిఖీ జరుగుతోంది...';
+
+      const meta = [
+        ['ఫోన్', info.Phone || '-'],
+        ['ఇమెయిల్', info.Email || '-'],
+        ['వెబ్‌సైట్', info.Website || '-'],
+        ['స్థానం', info.Latitude && info.Longitude ? `${info.Latitude}, ${info.Longitude}` : '-']
+      ];
+      el('metaGrid').innerHTML = meta.map(([label, value]) => `<div class="meta-item"><small>${label}</small><div style="margin-top:.35rem;font-weight:700;word-break:break-word;">${value}</div></div>`).join('');
+
+      el('announcementCount').textContent = announcements.length;
+      el('festivalCount').textContent = festivals.length;
+      el('poojaCount').textContent = safeArray(tabs.PoojaFees).length;
+      el('experienceCount').textContent = safeArray(tabs.DevoteeExperiences).length;
+
+      renderList('darshanList', safeArray(tabs.DarshanTimings), item => `
+        <div class="timing-row">
+          <strong>${item.Day || '-'}</strong>
+          <div><span class="chip">ఉదయం</span><div style="margin-top:.5rem;">${item.Morning || '-'}</div></div>
+          <div><span class="chip">సాయంత్రం</span><div style="margin-top:.5rem;">${item.Evening || '-'}</div></div>
+        </div>
+      `, 'దర్శన సమయాలు అందుబాటులో లేవు.');
+
+      renderList('storyList', safeArray(tabs.SthalaPuranam), item => `
+        <article class="story-item">
+          <div class="chip">${item.Title || 'విభాగం'}</div>
+          <p style="margin-top:.85rem;">${item.Description || '-'}</p>
+        </article>
+      `, 'స్థల పురాణం ఇంకా చేరలేదు.');
+
+      renderList('poojaList', safeArray(tabs.PoojaFees), item => `
+        <article class="pooja-item">
+          <div class="chip">పూజ సేవ</div>
+          <h4 style="margin:.85rem 0 .45rem; font-size:1.15rem;">${item.Pooja || '-'}</h4>
+          <div class="amount">₹${Number(item.Amount || 0).toLocaleString('en-IN')}</div>
+          <p style="margin-top:.75rem; color:var(--muted);">${item.Description || '-'}</p>
+        </article>
+      `, 'పూజ సేవలు లేవు.');
+
+      renderList('announcementList', announcements, item => `
+        <article class="announcement">
+          <div class="date-badge">${formatDateDDMMYYYY(item.Date)}</div>
+          <h4 style="margin:.8rem 0 .4rem; font-size:1.08rem;">${item.Title || '-'}</h4>
+          <p class="muted">${item.Description || '-'}</p>
+        </article>
+      `, 'ప్రస్తుతం చెల్లుబాటు అయ్యే ప్రకటనలు లేవు.');
+
+      renderList('festivalList', festivals, item => `
+        <article class="announcement">
+          <div class="date-badge">${formatDateDDMMYYYY(item.Date)}</div>
+          <h4 style="margin:.8rem 0 .4rem; font-size:1.08rem;">${item.Festival || '-'}</h4>
+          <p class="muted">${item.Description || '-'}</p>
+        </article>
+      `, 'రాబోయే పండుగలు లేవు.');
+
+      renderList('donorList', safeArray(tabs.Donors), item => `
+        <article class="donor-item">
+          <div class="chip">దాత</div>
+          <h4 style="margin:.85rem 0 .35rem; font-size:1.08rem;">${item.Name || '-'}</h4>
+          <p class="muted">${item.Place || '-'}</p>
+          <div class="amount" style="margin-top:.65rem;">₹${Number(item.Amount || 0).toLocaleString('en-IN')}</div>
+        </article>
+      `, 'దాతల వివరాలు లేవు.');
+
+      renderList('experienceList', safeArray(tabs.DevoteeExperiences), item => `
+        <article class="experience-item">
+          <div class="chip">భక్త అనుభవం</div>
+          <h4 style="margin:.85rem 0 .35rem; font-size:1.08rem;">${item.Name || '-'}</h4>
+          <p class="muted">${item.Place || '-'}</p>
+          <p style="margin-top:.75rem;">${item.Experience || '-'}</p>
+        </article>
+      `, 'అనుభవాలు ఇంకా లేవు.');
+
+      renderList('galleryList', images, item => `
+        <article class="gallery-card">
+          <img src="${driveImage(item.FileID)}" alt="${item.Title || 'Temple image'}" loading="lazy" decoding="async" width="1200" height="900" onerror="this.closest('.gallery-card').querySelector('.img-fallback').classList.remove('hidden'); this.classList.add('hidden');">
+          <div class="img-fallback hidden empty" style="margin-top:0;">చిత్రం లోడ్ కాలేదు</div>
+          <div style="margin-top:.85rem; display:flex; align-items:center; justify-content:space-between; gap:.75rem;">
+            <div>
+              <strong>${item.Title || '-'}</strong>
+              <div class="muted" style="font-size:.92rem; margin-top:.2rem;">${item.Category || '-'}</div>
+            </div>
+            <span class="chip">#${item.Order || 0}</span>
+          </div>
+        </article>
+      `, 'చిత్రాలు అందుబాటులో లేవు.');
+    }
+
+    async function fetchSheetData() {
+      const response = await fetch(SHEET_URL, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return response.json();
+    }
+
+    async function bootstrap() {
+      const cached = readCache();
+      if (cached?.data) {
+        render(cached.data, 'లోకల్ క్యాష్', cached.savedAt);
+      } else {
+        render(FALLBACK_DATA, 'డిఫాల్ట్ డేటా', Date.now());
+      }
+
+      try {
+        const liveData = await fetchSheetData();
+        saveCache(liveData);
+        render(liveData, 'గూగుల్ షీట్ తాజా డేటా', Date.now());
+        el('staleLabel').textContent = 'డేటా తాజాగానే ఉంది.';
+      } catch (error) {
+        console.warn('Live fetch failed:', error);
+        const cache = readCache();
+        el('staleLabel').textContent = cache?.savedAt
+          ? 'నెట్‌వర్క్ సమస్య. చివరి క్యాష్ డేటా చూపిస్తున్నాం.'
+          : 'నెట్‌వర్క్ సమస్య. డిఫాల్ట్ డేటా చూపిస్తున్నాం.';
+      }
+    }
+
+    document.getElementById('refreshBtn').addEventListener('click', async () => {
+      el('staleLabel').textContent = 'తాజా డేటా తెస్తున్నాం...';
+      try {
+        const liveData = await fetchSheetData();
+        saveCache(liveData);
+        render(liveData, 'మాన్యువల్ రిఫ్రెష్', Date.now());
+        el('staleLabel').textContent = 'తాజా డేటా విజయవంతంగా నవీకరించబడింది.';
+      } catch (error) {
+        el('staleLabel').textContent = 'తాజా డేటా రాలేదు. క్యాష్ డేటానే చూపుతున్నాం.';
+      }
+    });
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(err => console.warn('SW registration failed', err));
+      });
+    }
+
+    let deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();
+      deferredPrompt = event;
+      el('installBtn').hidden = false;
+    });
+
+    el('installBtn').addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      el('installBtn').hidden = true;
+    });
+
+    bootstrap();
+  </script>
+</body>
+</html>
