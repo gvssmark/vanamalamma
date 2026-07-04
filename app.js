@@ -110,6 +110,19 @@ function driveImage(fileId) {
   return fileId ? `https://drive.google.com/thumbnail?id=${encodeURIComponent(fileId)}&sz=w1200` : '';
 }
 
+function buildMapLink(info) {
+  const lat = info.Latitude;
+  const lng = info.Longitude;
+  const label = encodeURIComponent(info.TempleName || info.ShortName || 'Temple');
+  if (lat && lng) {
+    return `https://www.google.com/maps?q=${encodeURIComponent(lat + ',' + lng)}&z=17`;
+  }
+  if (info.Address) {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(info.Address)}`;
+  }
+  return '';
+}
+
 function saveCache(data) {
   try {
     localStorage.setItem(CACHE_KEY, JSON.stringify({ savedAt: Date.now(), data }));
@@ -165,11 +178,12 @@ function render(data, sourceLabel = 'లోకల్ క్యాష్', savedA
       : 'తాజా డేటా తనిఖీ జరుగుతోంది...';
   }
 
+  const mapLink = buildMapLink(info);
   const meta = [
     ['ఫోన్', info.Phone || '-'],
     ['ఇమెయిల్', info.Email || '-'],
     ['వెబ్‌సైట్', info.Website || '-'],
-    ['స్థానం', info.Latitude && info.Longitude ? `${info.Latitude}, ${info.Longitude}` : '-']
+    ['గూగుల్ మ్యాప్', mapLink ? `<a href="${mapLink}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:.45rem;color:var(--primary);font-weight:800;">మ్యాప్ చూడండి</a>` : '-']
   ];
 
   if (el('metaGrid')) {
