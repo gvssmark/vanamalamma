@@ -106,7 +106,7 @@
     }
     .meta-item small, .section-subtitle, .muted, .cache-note { color: var(--muted); }
     .quick-grid { grid-template-columns: repeat(2, 1fr); }
-    .stat { padding: 1.15rem; }
+    .stat { display:none; padding: 1.15rem; }
     .stat strong { display: block; font-size: 1.5rem; margin-bottom: .25rem; }
     .section { padding: .75rem 0 1.1rem; }
     .section-head {
@@ -131,7 +131,7 @@
       aspect-ratio: 4 / 3; object-fit: cover; border-radius: 16px; background: var(--surface-2);
     }
     .statusbar {
-      display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin-top: 1rem;
+      display: none; flex-wrap: wrap; align-items: center; gap: .7rem; margin-top: 1rem;
     }
     .status-pill {
       display: inline-flex; align-items: center; gap: .45rem; padding: .55rem .85rem; border-radius: 999px;
@@ -191,13 +191,13 @@
         <h2 id="templeName">శ్రీ విజయ వనమలమ్మ అమ్మవారి దేవస్థానం</h2>
         <p id="aboutTemple">స్వయంభూ అమ్మవారు</p>
         <div class="meta-grid" id="metaGrid"></div>
-        <div class="statusbar">
+        <div  style='display:none' class="statusbar">
           <div class="status-pill">డేటా మూలం: <strong id="dataSourceLabel">లోకల్ క్యాష్</strong></div>
           <div class="status-pill">చివరి నవీకరణ: <strong id="lastUpdatedLabel">-</strong></div>
           <div class="status-pill cache-note" id="staleLabel">తాజా డేటా తనిఖీ జరుగుతోంది...</div>
         </div>
       </article>
-      <aside class="quick-grid">
+      <aside style='display:none' class="quick-grid">
         <div class="stat"><span class="muted">ప్రకటనలు</span><strong id="announcementCount">0</strong><span class="muted">చెల్లుబాటు అయ్యేవి మాత్రమే</span></div>
         <div class="stat"><span class="muted">పండుగలు</span><strong id="festivalCount">0</strong><span class="muted">రాబోయే తేదీలు</span></div>
         <div class="stat"><span class="muted">పూజలు</span><strong id="poojaCount">0</strong><span class="muted">సేవల జాబితా</span></div>
