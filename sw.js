@@ -1,4 +1,4 @@
-const CACHE_NAME = "vanamalamma-temple-v1";
+const CACHE_NAME = "vanamalamma-temple-v2";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -36,18 +36,19 @@ self.addEventListener("fetch", (event) => {
   // (Google fonts, Drive thumbnails, Maps embed) go straight to the network.
   if (url.origin !== self.location.origin) return;
 
+  // Network-first: always try to get the latest deployed file. Only fall
+  // back to the cached copy if the network is unavailable (offline / GitHub
+  // Pages unreachable). This is what makes new pushes show up right away
+  // instead of being masked by a stale cached response.
   event.respondWith(
-    caches.match(req).then((cached) => {
-      const networkFetch = fetch(req)
-        .then((res) => {
-          if (res && res.status === 200) {
-            const copy = res.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
-          }
-          return res;
-        })
-        .catch(() => cached);
-      return cached || networkFetch;
-    })
+    fetch(req)
+      .then((res) => {
+        if (res && res.status === 200) {
+          const copy = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
+        }
+        return res;
+      })
+      .catch(() => caches.match(req))
   );
 });

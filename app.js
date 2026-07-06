@@ -436,7 +436,23 @@
   function registerSw() {
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () {
-        navigator.serviceWorker.register("sw.js").catch(function () { /* ignore */ });
+        navigator.serviceWorker.register("sw.js").then(function (reg) {
+          // Proactively ask the browser to check sw.js for changes now,
+          // instead of waiting for its own ~24h update check.
+          reg.update();
+          document.addEventListener("visibilitychange", function () {
+            if (document.visibilityState === "visible") reg.update();
+          });
+        }).catch(function () { /* ignore */ });
+      });
+
+      // Once a new service worker takes control, the page is being served
+      // by fresh code — reload once so the user actually sees the update.
+      var reloadedOnce = false;
+      navigator.serviceWorker.addEventListener("controllerchange", function () {
+        if (reloadedOnce) return;
+        reloadedOnce = true;
+        window.location.reload();
       });
     }
   }
