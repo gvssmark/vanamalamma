@@ -1,28 +1,17 @@
 {
   "name": "శ్రీ విజయ వనమలమ్మ అమ్మవారి దేవస్థానం",
   "short_name": "వనమలమ్మ",
-  "description": "దేవస్థానం సమాచారం, పూజలు, పండుగలు, దాతలు, భక్త అనుభవాలు మరియు ప్రకటనల కోసం ఆఫ్‌లైన్-ఫస్ట్ PWA.",
-  "lang": "te-IN",
-  "dir": "ltr",
+  "description": "Sri Vijaya Vanamalamma Ammavari Devasthanam - Machilipatnam",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#f7f2ea",
-  "theme_color": "#7a2e1f",
-  "categories": ["lifestyle", "social", "utilities"],
+  "background_color": "#FBF3E3",
+  "theme_color": "#6E1423",
+  "lang": "te",
   "icons": [
-       {
-      "src": "./images/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "./images/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }

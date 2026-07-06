@@ -1,65 +1,53 @@
-const STATIC_CACHE = 'temple-pwa-static-v1';
-const DATA_CACHE = 'temple-pwa-data-v1';
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxElKmiEFwhiIbpUxypWMB5xx31ZxaJ0ThHwqUCLQs0kwDp5fyITci_pnBqDytY6AH2/exec?sheetId=1IuC4hcLCJlKuJE2jFWYCndFUaMDCQF6QfJRTkHuHcu8';
-const APP_ASSETS = ['./', './index.html', './manifest.json', './sw.js'];
+const CACHE_NAME = "vanamalamma-temple-v1";
+const APP_SHELL = [
+  "./",
+  "./index.html",
+  "./style.css",
+  "./app.js",
+  "./manifest.json",
+  "./icon-192.png",
+  "./icon-512.png",
+  "./icon-512-maskable.png"
+];
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(STATIC_CACHE).then((cache) => cache.addAll(APP_ASSETS)));
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', (event) => {
+self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.keys().then((keys) => Promise.all(keys.map((key) => {
-      if (![STATIC_CACHE, DATA_CACHE].includes(key)) return caches.delete(key);
-      return Promise.resolve();
-    })))
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)).then(() => self.skipWaiting())
   );
-  self.clients.claim();
 });
 
-self.addEventListener('fetch', (event) => {
-  const { request } = event;
-  const url = new URL(request.url);
-
-  if (request.method !== 'GET') return;
-
-  if (url.href === SHEET_URL) {
-    event.respondWith(networkFirst(request));
-    return;
-  }
-
-  if (request.mode === 'navigate' || APP_ASSETS.includes(url.pathname.split('/').pop() ? `./${url.pathname.split('/').pop()}` : './')) {
-    event.respondWith(cacheFirst(request));
-  }
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
+    ).then(() => self.clients.claim())
+  );
 });
 
-async function cacheFirst(request) {
-  const cached = await caches.match(request);
-  return cached || fetch(request);
-}
+self.addEventListener("fetch", (event) => {
+  const req = event.request;
+  const url = new URL(req.url);
 
-async function networkFirst(request) {
-  const cache = await caches.open(DATA_CACHE);
-  try {
-    const fresh = await fetch(request, { cache: 'no-store' });
-    if (fresh.ok) cache.put(request, fresh.clone());
-    return fresh;
-  } catch (error) {
-    const cached = await cache.match(request);
-    return cached || Response.json({ error: true, message: 'offline' }, { status: 503 });
-  }
-}
+  // Never intercept the live temple-data endpoint — the app itself decides
+  // freshness (cache: no-store) and falls back to localStorage on failure.
+  if (url.hostname === "script.google.com") return;
 
+  // Only handle same-origin app-shell requests; let everything else
+  // (Google fonts, Drive thumbnails, Maps embed) go straight to the network.
+  if (url.origin !== self.location.origin) return;
 
-
-
-
-
-
-
-
-
-
-
-
+  event.respondWith(
+    caches.match(req).then((cached) => {
+      const networkFetch = fetch(req)
+        .then((res) => {
+          if (res && res.status === 200) {
+            const copy = res.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
+          }
+          return res;
+        })
+        .catch(() => cached);
+      return cached || networkFetch;
+    })
+  );
+});

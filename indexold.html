@@ -13,24 +13,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tiro+Telugu:ital@0;1&family=Noto+Sans+Telugu:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<style>
-  /* Scroll-edge affordance for the horizontally-scrollable header nav.
-     Two solid "cover" layers scroll WITH the links (background-attachment: local)
-     while two soft shadow layers stay fixed to the viewport (background-attachment: scroll).
-     The shadow only peeks out where the matching cover has scrolled away —
-     i.e. exactly when there's more content to reveal in that direction. */
-  #headerNav {
-    background-image:
-      linear-gradient(to right, var(--maroon-dark), var(--maroon-dark)),
-      linear-gradient(to left, var(--maroon-dark), var(--maroon-dark)),
-      linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)),
-      linear-gradient(to left, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
-    background-position: left center, right center, left center, right center;
-    background-repeat: no-repeat;
-    background-size: 24px 100%, 24px 100%, 14px 100%, 14px 100%;
-    background-attachment: local, local, scroll, scroll;
-  }
-</style>
 </head>
 <body>
 
