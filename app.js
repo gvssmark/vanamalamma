@@ -148,17 +148,10 @@
 
     // Header + hero
     document.getElementById("brandShortName").textContent = info.ShortName || info.TempleName || "";
-    document.getElementById("brandPlace").textContent = info.Address || "";
     document.getElementById("templeName").textContent = info.TempleName || "";
-    document.getElementById("templeAddress").textContent = info.Address ? "📍 " + info.Address : "";
     document.title = info.TempleName || document.title;
 
     var phoneDigits = digitsOnly(info.Phone);
-    if (phoneDigits) {
-      document.getElementById("callBtn").onclick = function () { window.location.href = "tel:" + phoneDigits; };
-      var heroCall = document.getElementById("heroCallLink");
-      heroCall.href = "tel:" + phoneDigits;
-    }
 
     // Hero banner image (falls back to gradient if no real Drive link is set)
     var heroBanner = document.getElementById("heroBanner");
@@ -168,6 +161,17 @@
       img.alt = info.TempleName || "Temple banner";
       img.src = bannerVal;
       heroBanner.insertBefore(img, heroBanner.firstChild);
+    }
+
+    // Deity portrait shown inside the hero overlay
+    var heroDeity = document.getElementById("heroDeity");
+    var deityImages = (tabs.Images || [])
+      .filter(function (row) { return row.Category && /deity/i.test(row.Category); })
+      .sort(function (a, b) { return (a.Order || 0) - (b.Order || 0); });
+    if (deityImages.length) {
+      heroDeity.innerHTML = '<img src="' + driveThumb(deityImages[0].FileID, 300) + '" alt="' + escapeHtml(deityImages[0].Title || "Deity") + '">';
+    } else {
+      heroDeity.innerHTML = "";
     }
 
     // About

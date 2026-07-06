@@ -30,6 +30,68 @@
     background-size: 24px 100%, 24px 100%, 14px 100%, 14px 100%;
     background-attachment: local, local, scroll, scroll;
   }
+
+  /* Keep the temple's short name from being enlarged by mobile browsers'
+     automatic text-size adjustment (font boosting) — the truncating
+     ellipsis in the header depends on a stable font size. */
+  #brandShortName {
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+  }
+
+  /* Deity portrait shown inside the hero banner overlay */
+  .hero-banner-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 18px;
+  }
+  .hero-deity {
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+    background: var(--sandalwood);
+    flex-shrink: 0;
+  }
+  .hero-deity img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-deity:empty { display: none; }
+
+  /* Compact contact block: small font, fixed 2-column x 2-row grid */
+  .contact-heading {
+    max-width: 760px;
+    margin: 0 auto 14px;
+    font-family: var(--font-display);
+    color: var(--gold-light);
+    font-size: 1.05rem;
+  }
+  .contact-grid {
+    max-width: 760px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 8px 14px;
+  }
+  .contact-item {
+    margin: 0;
+    font-size: 0.76rem;
+    line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .contact-item a { text-decoration: none; }
+  .social-block {
+    max-width: 760px;
+    margin: 18px auto 0;
+  }
 </style>
 </head>
 <body>
@@ -44,12 +106,8 @@
       </span>
       <div class="brand-text">
         <p class="brand-name" id="brandShortName">వనమలమ్మ అమ్మవారు</p>
-        <p class="brand-place" id="brandPlace">మచిలీపట్నం</p>
       </div>
     </div>
-    <button class="icon-btn" id="callBtn" aria-label="Call temple">
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1v3.4c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.3 1.1L6.6 10.8z"/></svg>
-    </button>
   </div>
   <nav class="header-nav" id="headerNav" aria-label="Section navigation">
     <a href="#hero" class="nav-link active">హోమ్</a>
@@ -72,16 +130,12 @@
 
   <section id="hero" class="hero">
     <div class="hero-banner" id="heroBanner">
-      <div class="hero-banner-overlay"></div>
+      <div class="hero-banner-overlay">
+        <div class="hero-deity" id="heroDeity"></div>
+      </div>
     </div>
     <div class="hero-content">
-      <p class="hero-eyebrow">స్వయంభూ అమ్మవారు</p>
       <h1 class="hero-title" id="templeName">శ్రీ విజయ వనమలమ్మ అమ్మవారి దేవస్థానం</h1>
-      <p class="hero-address" id="templeAddress">📍 మచిలీపట్నం</p>
-      <div class="hero-actions">
-        <a href="#location" class="btn btn-gold">దిశలు చూడండి</a>
-        <a href="#" id="heroCallLink" class="btn btn-outline">☎ కాల్ చేయండి</a>
-      </div>
     </div>
     <div class="offline-badge" id="offlineBadge" hidden>ఆఫ్‌లైన్ డేటా చూపిస్తోంది</div>
   </section>
@@ -138,18 +192,15 @@
 </main>
 
 <footer class="contact-footer" id="contact">
+  <h3 class="contact-heading">సంప్రదించండి</h3>
   <div class="contact-grid">
-    <div class="contact-block">
-      <h3>సంప్రదించండి</h3>
-      <p id="contactAddress">📍 —</p>
-      <p><a id="contactPhone" href="#">☎ —</a></p>
-      <p><a id="contactEmail" href="#">✉ —</a></p>
-      <p><a id="contactWebsite" href="#" target="_blank" rel="noopener">🌐 —</a></p>
-    </div>
-    <div class="contact-block social-block" id="socialBlock">
-      <h3>మమ్మల్ని అనుసరించండి</h3>
-      <div class="social-links" id="socialLinks"></div>
-    </div>
+    <p class="contact-item" id="contactAddress">📍 —</p>
+    <p class="contact-item"><a id="contactPhone" href="#">☎ —</a></p>
+    <p class="contact-item"><a id="contactEmail" href="#">✉ —</a></p>
+    <p class="contact-item"><a id="contactWebsite" href="#" target="_blank" rel="noopener">🌐 —</a></p>
+  </div>
+  <div class="social-block" id="socialBlock">
+    <div class="social-links" id="socialLinks"></div>
   </div>
   <p class="copyright">© <span id="footerYear"></span> శ్రీ విజయ వనమలమ్మ అమ్మవారి దేవస్థానం</p>
 </footer>
@@ -166,6 +217,10 @@
   <a href="#gallery" class="bottom-nav-link" data-target="gallery">
     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M4 5h16v14H4V5zm2 2v10h12V7H6zm2 8l3-3.5 2 2.5 3-4 3 5H8z"/></svg>
     <span>గ్యాలరీ</span>
+  </a>
+  <a href="#location" class="bottom-nav-link" data-target="location">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2c-4.4 0-8 3.6-8 8 0 5.5 8 12 8 12s8-6.5 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+    <span>ప్రదేశం</span>
   </a>
   <a href="#contact" class="bottom-nav-link" data-target="contact">
     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1v3.4c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.3 1.1L6.6 10.8z"/></svg>
