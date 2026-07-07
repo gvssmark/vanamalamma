@@ -331,13 +331,19 @@
     var socialLinks = document.getElementById("socialLinks");
     var socialBlock = document.getElementById("socialBlock");
     var socials = [];
-    if (info.Facebook) socials.push({ label: "FB", href: info.Facebook });
-    if (info.YouTube) socials.push({ label: "YT", href: info.YouTube });
-    if (info.WhatsApp) socials.push({ label: "WA", href: /^https?:\/\//.test(info.WhatsApp) ? info.WhatsApp : ("https://wa.me/" + digitsOnly(info.WhatsApp)) });
+    if (info.Facebook) socials.push({ name: "Facebook", fallback: "FB", href: info.Facebook, iconId: info.FacebookIconId });
+    if (info.YouTube) socials.push({ name: "YouTube", fallback: "YT", href: info.YouTube, iconId: info.YouTubeIconId });
+    if (info.WhatsApp) socials.push({
+      name: "WhatsApp", fallback: "WA", iconId: info.WhatsAppIconId,
+      href: /^https?:\/\//.test(info.WhatsApp) ? info.WhatsApp : ("https://wa.me/" + digitsOnly(info.WhatsApp))
+    });
     if (socials.length) {
       socialBlock.style.display = "";
       socialLinks.innerHTML = socials.map(function (s) {
-        return '<a href="' + s.href + '" target="_blank" rel="noopener" aria-label="' + s.label + '">' + s.label + '</a>';
+        var inner = s.iconId
+          ? '<img src="' + driveThumb(s.iconId, 80) + '" alt="" loading="lazy">'
+          : escapeHtml(s.fallback);
+        return '<a href="' + s.href + '" target="_blank" rel="noopener" aria-label="' + s.name + '">' + inner + '</a>';
       }).join("");
     } else {
       socialBlock.style.display = "none";
